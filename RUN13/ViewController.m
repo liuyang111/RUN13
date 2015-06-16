@@ -8,12 +8,16 @@
 
 #import "ViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "historyTableViewController.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+@synthesize numberOfMenuIetm;
+@synthesize navMenu;
+
 @synthesize walk;
 @synthesize run;
 @synthesize count;
@@ -40,6 +44,9 @@ int pausetimes = 0;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.numberOfMenuIetm = 4;  //每行显示ietm数目
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"menu" style:UIBarButtonItemStylePlain target:self action:@selector(openMenu:)];
+    
     self.walk.keyboardType = UIKeyboardTypeNumberPad;
     self.run.keyboardType = UIKeyboardTypeNumberPad;
     self.count.keyboardType = UIKeyboardTypeNumberPad;
@@ -65,6 +72,59 @@ int pausetimes = 0;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     NSLog(@"didRecieceMemoryWarning");
+}
+
+#define NAV MENU
+- (DOPNavbarMenu *)menu {
+    if (self.navMenu == nil) {
+        DOPNavbarMenuItem *item0 = [DOPNavbarMenuItem ItemWithTitle:@"10公里计划" icon:[UIImage imageNamed:@"Image"]];
+        DOPNavbarMenuItem *item1 = [DOPNavbarMenuItem ItemWithTitle:@"自定义" icon:[UIImage imageNamed:@"Image"]];
+        DOPNavbarMenuItem *item2 = [DOPNavbarMenuItem ItemWithTitle:@"历史记录" icon:[UIImage imageNamed:@"Image"]];
+        DOPNavbarMenuItem *item3 = [DOPNavbarMenuItem ItemWithTitle:@"设置" icon:[UIImage imageNamed:@"Image"]];
+
+        self.navMenu = [[DOPNavbarMenu alloc] initWithItems:@[item0,item1,item2,item3] width:self.view.dop_width maximumNumberInRow:self.numberOfMenuIetm];
+        self.navMenu.backgroundColor = [UIColor lightGrayColor];
+        self.navMenu.separatarColor = [UIColor whiteColor];
+        self.navMenu.delegate = self;
+    }
+    return self.navMenu;
+}
+
+- (void)openMenu:(id)sender {
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    if (self.menu.isOpen) {
+        [self.menu dismissWithAnimation:YES];
+    } else {
+        [self.menu showInNavigationController:self.navigationController];
+    }
+}
+
+- (void)didShowMenu:(DOPNavbarMenu *)menu {
+    [self.navigationItem.rightBarButtonItem setTitle:@"dismiss"];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+}
+
+- (void)didDismissMenu:(DOPNavbarMenu *)menu {
+    [self.navigationItem.rightBarButtonItem setTitle:@"menu"];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+}
+
+- (void)didSelectedMenu:(DOPNavbarMenu *)menu atIndex:(NSInteger)index {
+    if (index == 0) {
+        NSLog(@"10 miles");
+    }else if (index == 1){
+        NSLog(@"auto");
+    }else if (index == 2){
+        NSLog(@"history list");
+    }else if (index == 3){
+        NSLog(@"settings");
+    }
+        
+//        testTableViewController *testTVC = [[testTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
+//        NSArray *testarray = [NSArray arrayWithObjects:@"1",@"2",@"3", nil];
+//        [testTVC setTitle:@"aaaa"];
+//        [self.navigationController pushViewController:testTVC animated:YES];
+
 }
 
 - (IBAction)saveTextfieldData:(id)sender {

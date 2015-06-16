@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD0CF90C1B2FBB920099AE55 /* zbkaishi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CD0CF90B1B2FBB920099AE55 /* zbkaishi.mp3 */; };
+		CD0CF90F1B2FFDF10099AE55 /* historyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0CF90E1B2FFDF10099AE55 /* historyTableViewController.m */; };
+		CD0CF9181B300A240099AE55 /* DOPNavbarMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0CF9151B300A240099AE55 /* DOPNavbarMenu.m */; };
+		CD0CF9191B300A240099AE55 /* UIView+DOPExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CD0CF9171B300A240099AE55 /* UIView+DOPExtension.m */; };
 		CD3BFF561B2976EF00F2D330 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BFF551B2976EF00F2D330 /* main.m */; };
 		CD3BFF591B2976EF00F2D330 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BFF581B2976EF00F2D330 /* AppDelegate.m */; };
 		CD3BFF5C1B2976EF00F2D330 /* RUN13.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD3BFF5A1B2976EF00F2D330 /* RUN13.xcdatamodeld */; };
@@ -20,7 +24,7 @@
 		CDE19E381B2AC2B200D2C4E6 /* paubu.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E341B2AC2B200D2C4E6 /* paubu.wav */; };
 		CDE19E391B2AC2B200D2C4E6 /* xingzou.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E351B2AC2B200D2C4E6 /* xingzou.wav */; };
 		CDE19E3B1B2AC3CF00D2C4E6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE19E3A1B2AC3CF00D2C4E6 /* AVFoundation.framework */; };
-		CDE19E3D1B2AC8CD00D2C4E6 /* zbkaishi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E3C1B2AC8CD00D2C4E6 /* zbkaishi.mp3 */; };
+		EDF733F4930BED0C7DF88E5C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 925762C9BB3F4F22039A2571 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D55E2F29CDB3A355896A4C6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		925762C9BB3F4F22039A2571 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD0CF90B1B2FBB920099AE55 /* zbkaishi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zbkaishi.mp3; sourceTree = "<group>"; };
+		CD0CF90D1B2FFDF10099AE55 /* historyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyTableViewController.h; sourceTree = "<group>"; };
+		CD0CF90E1B2FFDF10099AE55 /* historyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = historyTableViewController.m; sourceTree = "<group>"; };
+		CD0CF9141B300A240099AE55 /* DOPNavbarMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOPNavbarMenu.h; sourceTree = "<group>"; };
+		CD0CF9151B300A240099AE55 /* DOPNavbarMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOPNavbarMenu.m; sourceTree = "<group>"; };
+		CD0CF9161B300A240099AE55 /* UIView+DOPExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DOPExtension.h"; sourceTree = "<group>"; };
+		CD0CF9171B300A240099AE55 /* UIView+DOPExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DOPExtension.m"; sourceTree = "<group>"; };
 		CD3BFF501B2976EF00F2D330 /* RUN13.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RUN13.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3BFF541B2976EF00F2D330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD3BFF551B2976EF00F2D330 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -53,7 +66,7 @@
 		CDE19E341B2AC2B200D2C4E6 /* paubu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paubu.wav; sourceTree = "<group>"; };
 		CDE19E351B2AC2B200D2C4E6 /* xingzou.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = xingzou.wav; sourceTree = "<group>"; };
 		CDE19E3A1B2AC3CF00D2C4E6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		CDE19E3C1B2AC8CD00D2C4E6 /* zbkaishi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zbkaishi.mp3; path = "../run13 audio/zbkaishi.mp3"; sourceTree = "<group>"; };
+		E9C05E25AB22D9D1A8300BF1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +76,7 @@
 			files = (
 				CDE19E3B1B2AC3CF00D2C4E6 /* AVFoundation.framework in Frameworks */,
 				CD3BFF7E1B29ACCA00F2D330 /* AudioToolbox.framework in Frameworks */,
+				EDF733F4930BED0C7DF88E5C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,18 +90,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		317C650E032ED24C566F5D10 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7D55E2F29CDB3A355896A4C6 /* Pods.debug.xcconfig */,
+				E9C05E25AB22D9D1A8300BF1 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C77F0F0EE8F7A548936535F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				925762C9BB3F4F22039A2571 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD0CF9131B300A240099AE55 /* DOPNavbarMenu */ = {
+			isa = PBXGroup;
+			children = (
+				CD0CF9141B300A240099AE55 /* DOPNavbarMenu.h */,
+				CD0CF9151B300A240099AE55 /* DOPNavbarMenu.m */,
+				CD0CF9161B300A240099AE55 /* UIView+DOPExtension.h */,
+				CD0CF9171B300A240099AE55 /* UIView+DOPExtension.m */,
+			);
+			path = DOPNavbarMenu;
+			sourceTree = "<group>";
+		};
 		CD3BFF471B2976EF00F2D330 = {
 			isa = PBXGroup;
 			children = (
 				CDE19E3A1B2AC3CF00D2C4E6 /* AVFoundation.framework */,
 				CDE19E321B2AC2B200D2C4E6 /* jieshu.wav */,
 				CDE19E341B2AC2B200D2C4E6 /* paubu.wav */,
-				CDE19E3C1B2AC8CD00D2C4E6 /* zbkaishi.mp3 */,
+				CD0CF90B1B2FBB920099AE55 /* zbkaishi.mp3 */,
 				CDE19E351B2AC2B200D2C4E6 /* xingzou.wav */,
 				CD3BFF7D1B29ACCA00F2D330 /* AudioToolbox.framework */,
 				CD3BFF521B2976EF00F2D330 /* RUN13 */,
 				CD3BFF6F1B2976F000F2D330 /* RUN13Tests */,
 				CD3BFF511B2976EF00F2D330 /* Products */,
+				317C650E032ED24C566F5D10 /* Pods */,
+				C77F0F0EE8F7A548936535F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +147,7 @@
 		CD3BFF521B2976EF00F2D330 /* RUN13 */ = {
 			isa = PBXGroup;
 			children = (
+				CD0CF9131B300A240099AE55 /* DOPNavbarMenu */,
 				CD3BFF571B2976EF00F2D330 /* AppDelegate.h */,
 				CD3BFF581B2976EF00F2D330 /* AppDelegate.m */,
 				CD3BFF5D1B2976EF00F2D330 /* ViewController.h */,
@@ -112,6 +157,8 @@
 				CD3BFF651B2976EF00F2D330 /* LaunchScreen.xib */,
 				CD3BFF5A1B2976EF00F2D330 /* RUN13.xcdatamodeld */,
 				CD3BFF531B2976EF00F2D330 /* Supporting Files */,
+				CD0CF90D1B2FFDF10099AE55 /* historyTableViewController.h */,
+				CD0CF90E1B2FFDF10099AE55 /* historyTableViewController.m */,
 			);
 			path = RUN13;
 			sourceTree = "<group>";
@@ -149,9 +196,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD3BFF761B2976F000F2D330 /* Build configuration list for PBXNativeTarget "RUN13" */;
 			buildPhases = (
+				4EB9AB432EBF38F6925D56BD /* Check Pods Manifest.lock */,
 				CD3BFF4C1B2976EF00F2D330 /* Sources */,
 				CD3BFF4D1B2976EF00F2D330 /* Frameworks */,
 				CD3BFF4E1B2976EF00F2D330 /* Resources */,
+				610BD8B6EBEF2DB2BCAACACE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -224,11 +273,11 @@
 			files = (
 				CD3BFF621B2976EF00F2D330 /* Main.storyboard in Resources */,
 				CD3BFF671B2976EF00F2D330 /* LaunchScreen.xib in Resources */,
-				CDE19E3D1B2AC8CD00D2C4E6 /* zbkaishi.mp3 in Resources */,
 				CDE19E381B2AC2B200D2C4E6 /* paubu.wav in Resources */,
 				CDE19E391B2AC2B200D2C4E6 /* xingzou.wav in Resources */,
 				CDE19E361B2AC2B200D2C4E6 /* jieshu.wav in Resources */,
 				CD3BFF641B2976EF00F2D330 /* Images.xcassets in Resources */,
+				CD0CF90C1B2FBB920099AE55 /* zbkaishi.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +290,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4EB9AB432EBF38F6925D56BD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		610BD8B6EBEF2DB2BCAACACE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CD3BFF4C1B2976EF00F2D330 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -248,7 +330,10 @@
 			files = (
 				CD3BFF5C1B2976EF00F2D330 /* RUN13.xcdatamodeld in Sources */,
 				CD3BFF591B2976EF00F2D330 /* AppDelegate.m in Sources */,
+				CD0CF90F1B2FFDF10099AE55 /* historyTableViewController.m in Sources */,
+				CD0CF9191B300A240099AE55 /* UIView+DOPExtension.m in Sources */,
 				CD3BFF5F1B2976EF00F2D330 /* ViewController.m in Sources */,
+				CD0CF9181B300A240099AE55 /* DOPNavbarMenu.m in Sources */,
 				CD3BFF561B2976EF00F2D330 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +458,7 @@
 		};
 		CD3BFF771B2976F000F2D330 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D55E2F29CDB3A355896A4C6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RUN13/Info.plist;
@@ -383,6 +469,7 @@
 		};
 		CD3BFF781B2976F000F2D330 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9C05E25AB22D9D1A8300BF1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RUN13/Info.plist;

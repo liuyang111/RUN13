@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "DOPNavbarMenu.h"
 
-@interface ViewController : UIViewController<UIAlertViewDelegate>
+@interface ViewController : UIViewController<UIAlertViewDelegate, DOPNavbarMenuDelegate>
+
+@property (assign, nonatomic) NSInteger numberOfMenuIetm;
+@property (strong, nonatomic) DOPNavbarMenu *navMenu;
+
 @property (strong, nonatomic) IBOutlet UITextField *walk;
 @property (strong, nonatomic) IBOutlet UITextField *run;
 @property (strong, nonatomic) IBOutlet UITextField *count;
