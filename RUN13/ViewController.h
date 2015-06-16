@@ -9,16 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "DOPNavbarMenu.h"
+#import <CNPPopupController/CNPPopupController.h>
 
-@interface ViewController : UIViewController<UIAlertViewDelegate, DOPNavbarMenuDelegate>
+@interface ViewController : UIViewController<UIAlertViewDelegate, DOPNavbarMenuDelegate,CNPPopupControllerDelegate>
 
 @property (assign, nonatomic) NSInteger numberOfMenuIetm;
 @property (strong, nonatomic) DOPNavbarMenu *navMenu;
 
-@property (strong, nonatomic) IBOutlet UITextField *walk;
-@property (strong, nonatomic) IBOutlet UITextField *run;
-@property (strong, nonatomic) IBOutlet UITextField *count;
-@property (strong, nonatomic) IBOutlet UIButton *saveData;
+@property (strong, nonatomic) CNPPopupController *popupController;
+
 @property (strong, nonatomic) IBOutlet UILabel *showData;
 @property (strong, nonatomic) IBOutlet UILabel *showHistory;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
@@ -26,9 +25,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *stopButton;
 @property (strong, nonatomic) IBOutlet UILabel *showStartTime;
 @property (strong, nonatomic) IBOutlet UILabel *showEndTime;
-@property (strong, nonatomic) IBOutlet UILabel *planTime;
-@property (strong, nonatomic) IBOutlet UILabel *realTime;
-@property (strong, nonatomic) IBOutlet UIButton *cancelTrainButton;
+//@property (strong, nonatomic) IBOutlet UILabel *realTime;
+//@property (strong, nonatomic) IBOutlet UIButton *cancelTrainButton;
 
 @property int historyTimes;
 @property (strong, nonatomic) NSTimer *timer;
