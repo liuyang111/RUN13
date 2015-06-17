@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "98CF1AA2B10022C96483820B"
+               BlueprintIdentifier = "45479BCE6A24A5203CDE48CD"
                BuildableName = "DMPagerViewController.bundle"
                BlueprintName = "Pods-DMPagerViewController-DMPagerViewController"
                ReferencedContainer = "container:Pods.xcodeproj">

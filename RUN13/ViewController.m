@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "historyTableViewController.h"
+#import <SBJson/SBJson4Writer.h>
 
 @interface ViewController ()
 
@@ -29,6 +30,8 @@
 //@synthesize realTime;
 @synthesize avAudioPlayer;
 //@synthesize cancelTrainButton;
+@synthesize planPliatDictionary;
+@synthesize plistTableView;
 
 int vibratenumber = 0;
 int walknumber = 0;
@@ -112,9 +115,10 @@ int totalSetTime;
 - (void)didSelectedMenu:(DOPNavbarMenu *)menu atIndex:(NSInteger)index {
     if (index == 0) {
         NSLog(@"10 miles");
+        [self showPlistPlanPopupWithFullScreenStyle];
     }else if (index == 1){
         NSLog(@"auto");
-        [self showPopupWithStyle:CNPPopupStyleCentered];
+        [self showCustomizePopupWithStyle:CNPPopupStyleCentered];
     }else if (index == 2){
         NSLog(@"history list");
         historyTableViewController *historylist = [[historyTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -124,16 +128,44 @@ int totalSetTime;
     }else if (index == 3){
         NSLog(@"settings");
     }
-        
-//        testTableViewController *testTVC = [[testTableViewController alloc]initWithStyle:UITableViewStyleGrouped];
-//        NSArray *testarray = [NSArray arrayWithObjects:@"1",@"2",@"3", nil];
-//        [testTVC setTitle:@"aaaa"];
-//        [self.navigationController pushViewController:testTVC animated:YES];
-
 }
 
-#pragma mark - CNPPopupController
-- (void)showPopupWithStyle:(CNPPopupStyle)popupStyle {
+#pragma mark - 读取plist存储计划
+- (void)showPlistPlanPopupWithFullScreenStyle{
+    NSString *planPlistPath = [[NSBundle mainBundle] pathForResource:@"13PlanList.plist" ofType:nil];
+//    NSString *ppp = [[NSBundle mainBundle]pathForResource:@"13PlanList.plist" ofType:nil];
+
+    planPliatDictionary = [NSDictionary dictionaryWithContentsOfFile:planPlistPath];
+    
+    if (plistTableView == NULL) {
+        plistTableView = [[UITableView alloc] initWithFrame:CGRectMake(15, 40,self.view.frame.size.width-30 , self.view.frame.size.height - 70) style:UITableViewStyleGrouped];
+    }
+    plistTableView.tag = 101;
+    plistTableView.delegate = self;
+    plistTableView.dataSource = self;
+    
+    CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 60)];
+    button.titleLabel.textColor = [UIColor whiteColor];
+    button.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    [button setTitle:@"确定" forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+    button.layer.cornerRadius = 4;
+    button.selectionHandler = ^(CNPPopupButton *button){
+        NSLog(@"Block for button: %@", button.titleLabel.text);
+//        [self showSetPlanDataWithWalk:walkTextFied.text.intValue Run:runTextFied.text.intValue Count:countTextFied.text.intValue];
+        [self.popupController dismissPopupControllerAnimated:YES];
+    };
+
+    self.popupController = [[CNPPopupController alloc] initWithContents:@[plistTableView, button]];
+    self.popupController.theme = [CNPPopupTheme defaultTheme];
+    self.popupController.theme.popupStyle = CNPPopupStyleFullscreen;
+    self.popupController.delegate = self;
+    [self.popupController presentPopupControllerAnimated:YES];
+}
+
+
+#pragma mark - 自定义
+- (void)showCustomizePopupWithStyle:(CNPPopupStyle)popupStyle {
     NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -205,6 +237,7 @@ int totalSetTime;
 
 //设置完本次训练计划后，在主界面显示设置数据
 - (void)showSetPlanDataWithWalk:(int)walkTime Run:(int)runTime Count:(int)countNum{
+    
     walkSetNum = walkTime;
     runSetNum = runTime;
     countSetNum = countNum;
@@ -409,4 +442,41 @@ static void completionCallback (SystemSoundID  mySSID,  int num){
 //        }
 //    }
 //}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSLog(@"plan plist array count = %lu",(unsigned long)self.planPliatDictionary.count);
+    return self.planPliatDictionary.count;
+}
+
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+
+    cell.textLabel.text = [[self.planPliatDictionary allKeys] objectAtIndex:indexPath.row];
+    
+    NSDictionary *dic = [[self.planPliatDictionary allValues] objectAtIndex:indexPath.row];
+    
+    NSString *walk = [dic valueForKey:@"walk"];
+    NSString *run = [dic valueForKey:@"run"];
+    NSString *count = [dic valueForKey:@"count"];
+    NSString *time = [dic valueForKey:@"time"];
+
+    
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"步行 %@ 分钟, 慢跑 %@ 分钟, 循环 %@ 次, 共 %@ 分钟",walk,run,count,time];
+    return cell;
+}
+
+- (void ) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"--%@",[[self.planPliatDictionary allValues] objectAtIndex:indexPath.row ]);
+    NSDictionary *selectDic = [[self.planPliatDictionary allValues] objectAtIndex:indexPath.row ];
+
+    [self showSetPlanDataWithWalk:[[selectDic objectForKey:@"walk"]intValue] Run:[[selectDic objectForKey:@"run"]intValue] Count:[[selectDic objectForKey:@"count"]intValue]];
+}
 @end

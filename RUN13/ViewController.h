@@ -11,7 +11,7 @@
 #import "DOPNavbarMenu.h"
 #import <CNPPopupController/CNPPopupController.h>
 
-@interface ViewController : UIViewController<UIAlertViewDelegate, DOPNavbarMenuDelegate,CNPPopupControllerDelegate>
+@interface ViewController : UIViewController<UIAlertViewDelegate, DOPNavbarMenuDelegate,CNPPopupControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (assign, nonatomic) NSInteger numberOfMenuIetm;
 @property (strong, nonatomic) DOPNavbarMenu *navMenu;
@@ -33,12 +33,15 @@
 
 @property (strong, nonatomic) AVAudioPlayer *avAudioPlayer;
 
+@property (strong, nonatomic) NSDictionary *planPliatDictionary;
+@property (retain, nonatomic) IBOutlet UITableView *plistTableView;
 
-- (IBAction)saveTextfieldData:(id)sender;
+
+//- (IBAction)saveTextfieldData:(id)sender;
 - (IBAction)startRun:(id)sender;
 - (IBAction)pauseRun:(id)sender;
 - (IBAction)stopRun:(id)sender;
-- (IBAction)cancelRun:(id)sender;
+//- (IBAction)cancelRun:(id)sender;
 
 @end
 

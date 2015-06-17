@@ -20,6 +20,8 @@
 		CD3BFF671B2976EF00F2D330 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD3BFF651B2976EF00F2D330 /* LaunchScreen.xib */; };
 		CD3BFF731B2976F000F2D330 /* RUN13Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BFF721B2976F000F2D330 /* RUN13Tests.m */; };
 		CD3BFF7E1B29ACCA00F2D330 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BFF7D1B29ACCA00F2D330 /* AudioToolbox.framework */; };
+		CD9DAA8A1B31152000395634 /* 13PlanList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA891B31152000395634 /* 13PlanList.plist */; };
+		CD9DAA8C1B315C1200395634 /* sort13PlanListArray.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */; };
 		CDE19E361B2AC2B200D2C4E6 /* jieshu.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E321B2AC2B200D2C4E6 /* jieshu.wav */; };
 		CDE19E381B2AC2B200D2C4E6 /* paubu.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E341B2AC2B200D2C4E6 /* paubu.wav */; };
 		CDE19E391B2AC2B200D2C4E6 /* xingzou.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E351B2AC2B200D2C4E6 /* xingzou.wav */; };
@@ -62,6 +64,8 @@
 		CD3BFF711B2976F000F2D330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD3BFF721B2976F000F2D330 /* RUN13Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RUN13Tests.m; sourceTree = "<group>"; };
 		CD3BFF7D1B29ACCA00F2D330 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CD9DAA891B31152000395634 /* 13PlanList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 13PlanList.plist; sourceTree = "<group>"; };
+		CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sort13PlanListArray.plist; sourceTree = "<group>"; };
 		CDE19E321B2AC2B200D2C4E6 /* jieshu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jieshu.wav; sourceTree = "<group>"; };
 		CDE19E341B2AC2B200D2C4E6 /* paubu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paubu.wav; sourceTree = "<group>"; };
 		CDE19E351B2AC2B200D2C4E6 /* xingzou.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = xingzou.wav; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		CD3BFF531B2976EF00F2D330 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CD9DAA891B31152000395634 /* 13PlanList.plist */,
+				CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */,
 				CD3BFF541B2976EF00F2D330 /* Info.plist */,
 				CD3BFF551B2976EF00F2D330 /* main.m */,
 			);
@@ -273,9 +279,11 @@
 			files = (
 				CD3BFF621B2976EF00F2D330 /* Main.storyboard in Resources */,
 				CD3BFF671B2976EF00F2D330 /* LaunchScreen.xib in Resources */,
+				CD9DAA8C1B315C1200395634 /* sort13PlanListArray.plist in Resources */,
 				CDE19E381B2AC2B200D2C4E6 /* paubu.wav in Resources */,
 				CDE19E391B2AC2B200D2C4E6 /* xingzou.wav in Resources */,
 				CDE19E361B2AC2B200D2C4E6 /* jieshu.wav in Resources */,
+				CD9DAA8A1B31152000395634 /* 13PlanList.plist in Resources */,
 				CD3BFF641B2976EF00F2D330 /* Images.xcassets in Resources */,
 				CD0CF90C1B2FBB920099AE55 /* zbkaishi.mp3 in Resources */,
 			);
