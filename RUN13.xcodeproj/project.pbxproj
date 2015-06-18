@@ -22,6 +22,9 @@
 		CD3BFF7E1B29ACCA00F2D330 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BFF7D1B29ACCA00F2D330 /* AudioToolbox.framework */; };
 		CD9DAA8A1B31152000395634 /* 13PlanList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA891B31152000395634 /* 13PlanList.plist */; };
 		CD9DAA8C1B315C1200395634 /* sort13PlanListArray.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */; };
+		CD9DAA921B315EC400395634 /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9DAA8F1B315EC400395634 /* CircleProgressView.m */; };
+		CD9DAA931B315EC400395634 /* CircleShapeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9DAA911B315EC400395634 /* CircleShapeLayer.m */; };
+		CD9DAA971B3169E200395634 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9DAA961B3169E200395634 /* Session.m */; };
 		CDE19E361B2AC2B200D2C4E6 /* jieshu.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E321B2AC2B200D2C4E6 /* jieshu.wav */; };
 		CDE19E381B2AC2B200D2C4E6 /* paubu.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E341B2AC2B200D2C4E6 /* paubu.wav */; };
 		CDE19E391B2AC2B200D2C4E6 /* xingzou.wav in Resources */ = {isa = PBXBuildFile; fileRef = CDE19E351B2AC2B200D2C4E6 /* xingzou.wav */; };
@@ -66,6 +69,12 @@
 		CD3BFF7D1B29ACCA00F2D330 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		CD9DAA891B31152000395634 /* 13PlanList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 13PlanList.plist; sourceTree = "<group>"; };
 		CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sort13PlanListArray.plist; sourceTree = "<group>"; };
+		CD9DAA8E1B315EC400395634 /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressView.h; sourceTree = "<group>"; };
+		CD9DAA8F1B315EC400395634 /* CircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleProgressView.m; sourceTree = "<group>"; };
+		CD9DAA901B315EC400395634 /* CircleShapeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleShapeLayer.h; sourceTree = "<group>"; };
+		CD9DAA911B315EC400395634 /* CircleShapeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleShapeLayer.m; sourceTree = "<group>"; };
+		CD9DAA951B3169E200395634 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		CD9DAA961B3169E200395634 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		CDE19E321B2AC2B200D2C4E6 /* jieshu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jieshu.wav; sourceTree = "<group>"; };
 		CDE19E341B2AC2B200D2C4E6 /* paubu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = paubu.wav; sourceTree = "<group>"; };
 		CDE19E351B2AC2B200D2C4E6 /* xingzou.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = xingzou.wav; sourceTree = "<group>"; };
@@ -151,6 +160,8 @@
 		CD3BFF521B2976EF00F2D330 /* RUN13 */ = {
 			isa = PBXGroup;
 			children = (
+				CD9DAA941B3169D100395634 /* Model */,
+				CD9DAA8D1B315EC400395634 /* CircularProgressView */,
 				CD0CF9131B300A240099AE55 /* DOPNavbarMenu */,
 				CD3BFF571B2976EF00F2D330 /* AppDelegate.h */,
 				CD3BFF581B2976EF00F2D330 /* AppDelegate.m */,
@@ -193,6 +204,26 @@
 				CD3BFF711B2976F000F2D330 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD9DAA8D1B315EC400395634 /* CircularProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				CD9DAA8E1B315EC400395634 /* CircleProgressView.h */,
+				CD9DAA8F1B315EC400395634 /* CircleProgressView.m */,
+				CD9DAA901B315EC400395634 /* CircleShapeLayer.h */,
+				CD9DAA911B315EC400395634 /* CircleShapeLayer.m */,
+			);
+			path = CircularProgressView;
+			sourceTree = "<group>";
+		};
+		CD9DAA941B3169D100395634 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD9DAA951B3169E200395634 /* Session.h */,
+				CD9DAA961B3169E200395634 /* Session.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,9 +368,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD3BFF5C1B2976EF00F2D330 /* RUN13.xcdatamodeld in Sources */,
+				CD9DAA921B315EC400395634 /* CircleProgressView.m in Sources */,
+				CD9DAA931B315EC400395634 /* CircleShapeLayer.m in Sources */,
 				CD3BFF591B2976EF00F2D330 /* AppDelegate.m in Sources */,
 				CD0CF90F1B2FFDF10099AE55 /* historyTableViewController.m in Sources */,
 				CD0CF9191B300A240099AE55 /* UIView+DOPExtension.m in Sources */,
+				CD9DAA971B3169E200395634 /* Session.m in Sources */,
 				CD3BFF5F1B2976EF00F2D330 /* ViewController.m in Sources */,
 				CD0CF9181B300A240099AE55 /* DOPNavbarMenu.m in Sources */,
 				CD3BFF561B2976EF00F2D330 /* main.m in Sources */,

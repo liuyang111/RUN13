@@ -5,13 +5,13 @@
 	<key>day1</key>
 	<dict>
 		<key>run</key>
-		<integer>1</integer>
+		<real>1.5</real>
 		<key>walk</key>
 		<integer>1</integer>
 		<key>count</key>
-		<integer>8</integer>
+		<integer>10</integer>
 		<key>time</key>
-		<integer>16</integer>
+		<integer>20</integer>
 	</dict>
 	<key>day2</key>
 	<dict>
