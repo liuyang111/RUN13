@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>day3</key>
+	<dict>
+		<key>run</key>
+		<integer>2</integer>
+		<key>walk</key>
+		<integer>1</integer>
+		<key>count</key>
+		<integer>10</integer>
+		<key>time</key>
+		<integer>30</integer>
+	</dict>
 	<key>day1</key>
 	<dict>
 		<key>run</key>

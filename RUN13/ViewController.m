@@ -13,7 +13,7 @@
 #import "CircleProgressView.h"
 #import "Session.h"
 
-#define SET_MINITE_TIME 6
+#define SET_MINITE_TIME 60
 
 @interface ViewController ()
 
@@ -280,12 +280,20 @@ unsigned int unitFlags;
     countTextFied.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     [customView addSubview:countTextFied];
 
-    CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 60)];
+    CNPPopupButton *button = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     button.titleLabel.textColor = [UIColor whiteColor];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [button setTitle:@"确定" forState:UIControlStateNormal];
     button.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
     button.layer.cornerRadius = 4;
+    
+    CNPPopupButton *cancelPopbutton = [[CNPPopupButton alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    cancelPopbutton.titleLabel.textColor = [UIColor whiteColor];
+    cancelPopbutton.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    [cancelPopbutton setTitle:@"取消" forState:UIControlStateNormal];
+    cancelPopbutton.backgroundColor = [UIColor colorWithRed:0.46 green:0.8 blue:1.0 alpha:1.0];
+    cancelPopbutton.layer.cornerRadius = 4;
+
     //??
     button.selectionHandler = ^(CNPPopupButton *button){
         NSLog(@"Block for button: %@", button.titleLabel.text);
@@ -299,8 +307,11 @@ unsigned int unitFlags;
         }
     };
 
+     cancelPopbutton.selectionHandler = ^(CNPPopupButton *button){
+         [self.popupController dismissPopupControllerAnimated:YES];
+     };
     
-    self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel, customView, button]];
+    self.popupController = [[CNPPopupController alloc] initWithContents:@[titleLabel, customView, button,cancelPopbutton]];
     self.popupController.theme = [CNPPopupTheme defaultTheme];
     self.popupController.theme.popupStyle = popupStyle;
     self.popupController.delegate = self;
@@ -370,6 +381,8 @@ unsigned int unitFlags;
         [pauseErrorAlert show];
     }else{
         if (pauseButton.selected == YES) {
+            self.pauseButton.titleLabel.text = [NSString stringWithFormat:@"暂停"];
+
             if (self.ifWalking == YES) {
                 [self startProgressWithStatus:@"跑步"];
             }else if(self.ifWalking == NO){
@@ -381,7 +394,8 @@ unsigned int unitFlags;
             [timer setFireDate:[NSDate distantPast]];
         }else{
             [self stopProgress];
-            
+//            [self.pauseButton setTitle:@"继续" forState:UIControlStateHighlighted];
+//            self.pauseButton.tintColor = [UIColor redColor];
             NSLog(@"pause");//暂停惩罚，总循环训练计数 +1
             pauseButton.selected = YES;
             [timer setFireDate:[NSDate distantFuture]];
@@ -405,32 +419,6 @@ unsigned int unitFlags;
         [cancelRunAlert show];
         cancelRunAlert.tag = 101;
 
-    }
-    else{
-        if ([self.progressTimer isValid]) {
-            [self.progressTimer invalidate];
-            self.progressTimer = nil;
-        }
-       
-        NSString *hist = [[NSUserDefaults standardUserDefaults] objectForKey:@"historyTimes"];
-        if (hist.length == 0) {
-            self.historyTimes = 1;
-        }
-        else{
-            self.historyTimes = hist.intValue +1 ;
-        }
-        
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",self.historyTimes] forKey:@"historyTimes"];
-        
-        NSLog(@"self history times = %d",self.historyTimes);
-        
-        if (pausetimes == 0) {
-            self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"顺利完成本次训练", @"")];
-        }else{
-            self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"完成训练，中途暂停 %d 次，训练循环 +%d次", @""),pausetimes,pausetimes];
-        }
-        startButton.enabled = YES;
-        stopButton.enabled = NO;
     }
 }
 
@@ -497,8 +485,28 @@ unsigned int unitFlags;
         [self.timer invalidate];
         self.timer = nil;
         
-        self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"恭喜你，本次训练结束，请保存记录。", @""),doneWalknumber];
-        self.stopButton.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"保存", @"")];
+        self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"恭喜你，本次训练结束，将自动保存记录。", @""),doneWalknumber];
+        
+        NSString *hist = [[NSUserDefaults standardUserDefaults] objectForKey:@"historyTimes"];
+        if (hist.length == 0) {
+            self.historyTimes = 1;
+        }
+        else{
+            self.historyTimes = hist.intValue +1 ;
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d",self.historyTimes] forKey:@"historyTimes"];
+        
+        NSLog(@"self history times = %d",self.historyTimes);
+        
+        if (pausetimes == 0) {
+            self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"顺利完成本次训练", @"")];
+        }else{
+            self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"完成训练，中途暂停 %d 次，训练循环 +%d次", @""),pausetimes,pausetimes];
+        }
+        startButton.enabled = YES;
+        stopButton.enabled = NO;
+
     }
 }
 
