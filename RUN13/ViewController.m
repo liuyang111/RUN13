@@ -15,7 +15,10 @@
 
 #define SET_MINITE_TIME 60
 
-@interface ViewController ()
+@interface ViewController (){
+    BOOL ifStarted;
+    BOOL ifPauseed;
+}
 
 @end
 
@@ -26,8 +29,8 @@
 @synthesize showData;
 @synthesize showStatusString;
 @synthesize startButton;
-@synthesize pauseButton;
-@synthesize stopButton;
+//@synthesize pauseButton;
+//@synthesize stopButton;
 @synthesize showStartTime;
 @synthesize timer;
 //@synthesize realTime;
@@ -87,23 +90,26 @@ unsigned int unitFlags;
     [self.view addSubview:self.showStartTime];
     
     
-    self.startButton = [[UIButton alloc] initWithFrame:CGRectMake(35, self.circleProgressView.frame.size.height + 220, 60, 30)];
-    [self.startButton setTitle:NSLocalizedString(@"开始", @"") forState:UIControlStateNormal];
-    self.startButton.titleLabel.font = [UIFont boldSystemFontOfSize:24];
+    self.startButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-20, self.circleProgressView.frame.size.height + 220, 40, 40)];
+//    [self.startButton setTitle:NSLocalizedString(@"开始", @"") forState:UIControlStateNormal];
+    [self.startButton setImage:[UIImage imageNamed:@"Play"] forState:UIControlStateNormal];
+//    self.startButton.titleLabel.font = [UIFont boldSystemFontOfSize:24];
     [self.startButton addTarget:self action:@selector(startRun:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.startButton];
     
-    self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(125, self.circleProgressView.frame.size.height + 220, 60, 30)];
-    [self.pauseButton setTitle:NSLocalizedString(@"暂停", @"") forState:UIControlStateNormal];
-    self.pauseButton.titleLabel.font = [UIFont boldSystemFontOfSize:24];
-    [self.pauseButton addTarget:self action:@selector(pauseRun:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.pauseButton];
+//    self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(125, self.circleProgressView.frame.size.height + 220, 60, 30)];
+//    [self.pauseButton setTitle:NSLocalizedString(@"暂停", @"") forState:UIControlStateNormal];
+//    self.pauseButton.titleLabel.font = [UIFont boldSystemFontOfSize:24];
+//    [self.pauseButton addTarget:self action:@selector(pauseRun:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:self.pauseButton];
     
-    self.stopButton = [[UIButton alloc] initWithFrame:CGRectMake(220, self.circleProgressView.frame.size.height + 220, 60, 30)];
-    [self.stopButton setTitle:NSLocalizedString(@"结束", @"") forState:UIControlStateNormal];
-    self.stopButton.titleLabel.font = [UIFont boldSystemFontOfSize:24];
-    [self.stopButton addTarget:self action:@selector(stopRun:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.stopButton];
+//    self.stopButton = [[UIButton alloc] initWithFrame:CGRectMake(250, self.circleProgressView.frame.size.height + 220, 30, 30)];
+////    [self.stopButton setTitle:NSLocalizedString(@"结束", @"") forState:UIControlStateNormal];
+//    [self.stopButton setImage:[UIImage imageNamed:@"Delete"] forState:UIControlStateNormal];
+//
+////    self.stopButton.titleLabel.font = [UIFont boldSystemFontOfSize:24];
+//    [self.stopButton addTarget:self action:@selector(stopRun:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:self.stopButton];
 
     NSString *hist = [[NSUserDefaults standardUserDefaults] objectForKey:@"historyTimes"];
     NSLog(@"cancel -- self history times = %d",hist.intValue);
@@ -127,7 +133,7 @@ unsigned int unitFlags;
     }
     
     
-    stopButton.enabled = NO;
+//    stopButton.enabled = NO;
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setActive:YES error:nil];
@@ -139,6 +145,8 @@ unsigned int unitFlags;
     cal = [NSCalendar currentCalendar];
     unitFlags = kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay | kCFCalendarUnitHour | kCFCalendarUnitMinute |kCFCalendarUnitSecond;
 
+    ifStarted = NO;
+    ifPauseed = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -340,78 +348,121 @@ unsigned int unitFlags;
     
     showData.text = [NSString stringWithFormat:@"本次运动设置：行走 %.1f 分钟，慢跑 %.1f 分钟，共 %d 次。预计时长：%.1f 分钟",walkSetNum,runSetNum,countSetNum,totalSetTime];
     
-    NSString *kaishiSound = [[NSBundle mainBundle]pathForResource:@"zbkaishi" ofType:@"mp3"];
-    NSURL *kaishiSoundURL = [NSURL URLWithString:kaishiSound];
-    avAudioPlayer = nil;
-    avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:kaishiSoundURL error:nil];
-    [avAudioPlayer play];
+//    NSString *kaishiSound = [[NSBundle mainBundle]pathForResource:@"zbkaishi" ofType:@"mp3"];
+//    NSURL *kaishiSoundURL = [NSURL URLWithString:kaishiSound];
+//    avAudioPlayer = nil;
+//    avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:kaishiSoundURL error:nil];
+//    [avAudioPlayer play];
+//    [self startVideo:@"zbkaishi" type:@"mp3"];
 
 }
 
-
+- (void) startVideo:(NSString *)videoname type:(NSString *)typename{
+    NSString *videoSound = [[NSBundle mainBundle]pathForResource:videoname ofType:typename];
+    NSURL *videoSoundURL = [NSURL URLWithString:videoSound];
+    avAudioPlayer = nil;
+    avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:videoSoundURL error:nil];
+    [avAudioPlayer play];
+}
 #pragma mark button
 
 - (IBAction)startRun:(id)sender {
-    NSLog(@"start");
-    
-    if (totalSetTime != 0.0) {
-        self.startButton.enabled = NO;
-        doneRunnumber = 0;
-        doneWalknumber = 0;
-        pausetimes = 0;
-        
-        self.session.state = kSessionStateStop;
-        [self startTimer];
-        
-        [self walkTimerSetting:timer];
-        
-        self.startDate = [NSDate date];
-        NSDateComponents *showdt = [cal components:unitFlags fromDate:self.startDate];
-        self.startDateString = [NSString stringWithFormat:@"%ld-%ld-%ld   %ld:%ld:%ld",(long)showdt.year,(long)showdt.month,(long)showdt.day,(long)showdt.hour,(long)showdt.minute,(long)showdt.second];
-        showStartTime.text = self.startDateString;
-        
-        self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"正在进行训练循环第 1 次", @"")];
+//    NSLog(@"start");
+    if (ifStarted == NO) {
+        if (totalSetTime != 0.0) {
+            NSLog(@"start");
+            ifStarted = YES;
+            
+//            stopButton.enabled = YES;
+//            self.startButton.titleLabel.text = [NSString stringWithFormat:@"暂停"];
+//            [self.startButton setTitle:[NSString stringWithFormat:@"暂停"] forState:UIControlStateNormal];
+            [self.startButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
 
-    }
-}
-
-- (IBAction)pauseRun:(id)sender {
-    if(![timer isValid]){
-        UIAlertView *pauseErrorAlert = [[UIAlertView alloc] initWithTitle:@"warning" message:@"都没开始呢。。。" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [pauseErrorAlert show];
-    }else{
-        if (pauseButton.selected == YES) {
-            self.pauseButton.titleLabel.text = [NSString stringWithFormat:@"暂停"];
-
-            if (self.ifWalking == YES) {
-                [self startProgressWithStatus:@"跑步"];
-            }else if(self.ifWalking == NO){
-                [self startProgressWithStatus:@"行走"];
-            }
-
-            NSLog(@"resume");
-            pauseButton.selected = NO;
-            [timer setFireDate:[NSDate distantPast]];
+            doneRunnumber = 0;
+            doneWalknumber = 0;
+            pausetimes = 0;
+            
+            self.session.state = kSessionStateStop;
+            [self startTimer];
+            
+            [self walkTimerSetting:timer];
+            
+            self.startDate = [NSDate date];
+            NSDateComponents *showdt = [cal components:unitFlags fromDate:self.startDate];
+            self.startDateString = [NSString stringWithFormat:@"%ld-%ld-%ld   %ld:%ld:%ld",(long)showdt.year,(long)showdt.month,(long)showdt.day,(long)showdt.hour,(long)showdt.minute,(long)showdt.second];
+            showStartTime.text = self.startDateString;
+            
+            self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"正在进行训练循环第 1 次", @"")];
+            
         }else{
+            UIAlertView *cannotStartAlert = [[UIAlertView alloc] initWithTitle:@"warning" message:@"请先进行训练设置" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            [cannotStartAlert show];
+        }
+    }else if(ifStarted == YES){
+        if (ifPauseed == NO) {
+            NSLog(@"pause");
+            ifPauseed = YES;
+            
+//            self.startButton.titleLabel.text = [NSString stringWithFormat:@"继续"];
+//            [self.startButton setTitle:[NSString stringWithFormat:@"继续"] forState:UIControlStateNormal];
+            [self.startButton setImage:[UIImage imageNamed:@"Play"] forState:UIControlStateNormal];
+
             [self stopProgress];
-//            [self.pauseButton setTitle:@"继续" forState:UIControlStateHighlighted];
-//            self.pauseButton.tintColor = [UIColor redColor];
-            NSLog(@"pause");//暂停惩罚，总循环训练计数 +1
-            pauseButton.selected = YES;
+            //暂停惩罚，总循环训练计数 +1
             [timer setFireDate:[NSDate distantFuture]];
-//            doneWalknumber --;
-//            doneRunnumber --;
             countSetNum ++;
             pausetimes ++;
             
             totalSetTime =( walkSetNum + runSetNum ) * countSetNum;
             showData.text = [NSString stringWithFormat:@"本次运动设置：行走 %.1f 分钟，慢跑 %.1f 分钟，共 %d 次。预计时长：%.1f 分钟",walkSetNum,runSetNum,countSetNum,totalSetTime];
+            
+            self.showStatusString.text = [NSString stringWithFormat:@"再次开始将进行下一阶段练习，同时练习总循环数+1"];
 
+        } else {
+            UIActionSheet *resumeOrDeleteSheet = [[UIActionSheet alloc] initWithTitle:@"操作控制选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"继续训练" otherButtonTitles:@"结束训练", nil];
+            [resumeOrDeleteSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
+            [resumeOrDeleteSheet showInView:self.view];
         }
     }
 }
 
-- (IBAction)stopRun:(id)sender {
+//- (IBAction)pauseRun:(id)sender {
+//    if(![timer isValid]){
+//        UIAlertView *pauseErrorAlert = [[UIAlertView alloc] initWithTitle:@"warning" message:@"都没开始呢。。。" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+//        [pauseErrorAlert show];
+//    }else{
+//        if (pauseButton.selected == YES) {
+//            self.pauseButton.titleLabel.text = [NSString stringWithFormat:@"暂停"];
+//
+//            if (self.ifWalking == YES) {
+//                [self startProgressWithStatus:@"跑步"];
+//            }else if(self.ifWalking == NO){
+//                [self startProgressWithStatus:@"行走"];
+//            }
+//
+//            NSLog(@"resume");
+//            pauseButton.selected = NO;
+//            [timer setFireDate:[NSDate distantPast]];
+//        }else{
+//            [self stopProgress];
+////            [self.pauseButton setTitle:@"继续" forState:UIControlStateHighlighted];
+////            self.pauseButton.tintColor = [UIColor redColor];
+//            NSLog(@"pause");//暂停惩罚，总循环训练计数 +1
+//            pauseButton.selected = YES;
+//            [timer setFireDate:[NSDate distantFuture]];
+////            doneWalknumber --;
+////            doneRunnumber --;
+//            countSetNum ++;
+//            pausetimes ++;
+//            
+//            totalSetTime =( walkSetNum + runSetNum ) * countSetNum;
+//            showData.text = [NSString stringWithFormat:@"本次运动设置：行走 %.1f 分钟，慢跑 %.1f 分钟，共 %d 次。预计时长：%.1f 分钟",walkSetNum,runSetNum,countSetNum,totalSetTime];
+//
+//        }
+//    }
+//}
+
+- (void)stopRun{
     NSLog(@"stop");
     if ([self.timer isValid]) {
         NSLog(@"timer is valid can not stop");
@@ -442,11 +493,12 @@ unsigned int unitFlags;
         [self vibratePlayNum:1];
         
         //+ video 这里是行走训练
-        NSString *xingzouSound = [[NSBundle mainBundle]pathForResource:@"xingzou" ofType:@"wav"];
-        NSURL *xingzouSoundURL = [NSURL URLWithString:xingzouSound];
-        avAudioPlayer = nil;
-        avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:xingzouSoundURL error:nil];
-        [avAudioPlayer play];
+//        NSString *xingzouSound = [[NSBundle mainBundle]pathForResource:@"xingzou" ofType:@"wav"];
+//        NSURL *xingzouSoundURL = [NSURL URLWithString:xingzouSound];
+//        avAudioPlayer = nil;
+//        avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:xingzouSoundURL error:nil];
+//        [avAudioPlayer play];
+//        [self startVideo:@"xingzou" type:@"wav"];
 
         self.timer = [NSTimer scheduledTimerWithTimeInterval:(walkSetNum * SET_MINITE_TIME) target:self selector:@selector(runTimerSetting:) userInfo:nil repeats:YES];
         
@@ -460,11 +512,12 @@ unsigned int unitFlags;
         NSLog(@"end");
         [self vibratePlayNum:3];
 
-        NSString *jieshuSound = [[NSBundle mainBundle]pathForResource:@"jieshu" ofType:@"wav"];
-        NSURL *jieshuSoundURL = [NSURL URLWithString:jieshuSound];
-        avAudioPlayer = nil;
-        avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:jieshuSoundURL error:nil];
-        [avAudioPlayer play];
+//        NSString *jieshuSound = [[NSBundle mainBundle]pathForResource:@"jieshu" ofType:@"wav"];
+//        NSURL *jieshuSoundURL = [NSURL URLWithString:jieshuSound];
+//        avAudioPlayer = nil;
+//        avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:jieshuSoundURL error:nil];
+//        [avAudioPlayer play];
+//        [self startVideo:@"jieshu" type:@"wav"];
         
         self.endDate = [NSDate date];
         NSDateComponents *showet = [cal components:unitFlags fromDate:endDate];
@@ -473,8 +526,6 @@ unsigned int unitFlags;
         
         self.showStartTime.text = [NSString stringWithFormat:@"%@------%@",self.startDateString,self.endDateString];
         
-        stopButton.enabled = YES;
-
         
         self.circleProgressView.status = NSLocalizedString(@"训练结束", nil);
         self.circleProgressView.tintColor = [UIColor whiteColor];
@@ -505,7 +556,6 @@ unsigned int unitFlags;
             self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"完成训练，中途暂停 %d 次，训练循环 +%d次", @""),pausetimes,pausetimes];
         }
         startButton.enabled = YES;
-        stopButton.enabled = NO;
 
     }
 }
@@ -521,11 +571,12 @@ unsigned int unitFlags;
     self.ifWalking = NO;
     [self vibratePlayNum:2];
 //    //+ video 这里跑步训练
-    NSString *paobuSound = [[NSBundle mainBundle]pathForResource:@"paubu" ofType:@"wav"];
-    NSURL *paobuSoundURL = [NSURL URLWithString:paobuSound];
-    avAudioPlayer = nil;
-    avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:paobuSoundURL error:nil];
-    [avAudioPlayer play];
+//    NSString *paobuSound = [[NSBundle mainBundle]pathForResource:@"paubu" ofType:@"wav"];
+//    NSURL *paobuSoundURL = [NSURL URLWithString:paobuSound];
+//    avAudioPlayer = nil;
+//    avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:paobuSoundURL error:nil];
+//    [avAudioPlayer play];
+//    [self startVideo:@"paubu" type:@"wav"];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:(runSetNum * SET_MINITE_TIME) target:self selector:@selector(walkTimerSetting:) userInfo:nil repeats:YES];
 
@@ -611,6 +662,15 @@ static void completionCallback (SystemSoundID  mySSID,  int num){
                 [self.timer invalidate];
                 self.timer = nil;
             }
+            if (self.progressTimer) {
+                [self.progressTimer invalidate];
+                self.progressTimer = nil;
+            }
+            
+            self.circleProgressView.status = NSLocalizedString(@"取消训练", nil);
+            self.circleProgressView.tintColor = [UIColor blackColor];
+            self.circleProgressView.elapsedTime = 0;
+
             startButton.enabled = YES;
             NSString *hist = [[NSUserDefaults standardUserDefaults] objectForKey:@"historyTimes"];
             NSLog(@"cancel -- self history times = %d",hist.intValue);
@@ -656,5 +716,28 @@ static void completionCallback (SystemSoundID  mySSID,  int num){
     NSDictionary *selectDic = [[self.planPliatDictionary allValues] objectAtIndex:indexPath.row ];
 
     [self showSetPlanDataWithWalk:[[selectDic objectForKey:@"walk"]floatValue] Run:[[selectDic objectForKey:@"run"]floatValue] Count:[[selectDic objectForKey:@"count"]intValue]];
+}
+
+#pragma mark actionsheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        NSLog(@"resume action sheet");
+        NSLog(@"resume");
+        ifPauseed = NO;
+        
+        [self.startButton setImage:[UIImage imageNamed:@"Pause"] forState:UIControlStateNormal];
+        
+        if (self.ifWalking == YES) {
+            [self startProgressWithStatus:@"跑步"];
+        }else if(self.ifWalking == NO){
+            [self startProgressWithStatus:@"行走"];
+        }
+        
+        [timer setFireDate:[NSDate distantPast]];
+        
+    }else if (buttonIndex == 1){
+        NSLog(@"delete action sheet");
+        [self stopRun];
+    }
 }
 @end

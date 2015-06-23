@@ -41,13 +41,13 @@
     self.path = [self drawPathWithArcCenter];
     self.fillColor = [UIColor clearColor].CGColor;
     self.strokeColor = [UIColor colorWithRed:0.86f green:0.86f blue:0.86f alpha:0.4f].CGColor;
-    self.lineWidth = 20;  //progress 圆环图券宽
+    self.lineWidth = 15;  //progress 圆环图券宽
     
     self.progressLayer = [CAShapeLayer layer];
     self.progressLayer.path = [self drawPathWithArcCenter];
     self.progressLayer.fillColor = [UIColor clearColor].CGColor;
     self.progressLayer.strokeColor = [UIColor whiteColor].CGColor;
-    self.progressLayer.lineWidth = 20;
+    self.progressLayer.lineWidth = 15;  //进程圈宽度
     self.progressLayer.lineCap = kCALineCapRound;
     self.progressLayer.lineJoin = kCALineJoinRound;
     [self addSublayer:self.progressLayer];
@@ -96,7 +96,7 @@
             progress = 1.0f;
         }
         
-//        NSLog(@"Percent = %f", progress);
+       //        NSLog(@"Percent = %f", progress);
         
         return progress;
     }

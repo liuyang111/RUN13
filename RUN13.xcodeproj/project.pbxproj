@@ -20,6 +20,9 @@
 		CD3BFF671B2976EF00F2D330 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD3BFF651B2976EF00F2D330 /* LaunchScreen.xib */; };
 		CD3BFF731B2976F000F2D330 /* RUN13Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3BFF721B2976F000F2D330 /* RUN13Tests.m */; };
 		CD3BFF7E1B29ACCA00F2D330 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3BFF7D1B29ACCA00F2D330 /* AudioToolbox.framework */; };
+		CD744EF51B3930EC00E6957E /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = CD744EF31B3930EC00E6957E /* Pause.png */; };
+		CD744EF61B3930EC00E6957E /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = CD744EF41B3930EC00E6957E /* Play.png */; };
+		CD744EF81B3937CB00E6957E /* Delete.png in Resources */ = {isa = PBXBuildFile; fileRef = CD744EF71B3937CB00E6957E /* Delete.png */; };
 		CD9DAA8A1B31152000395634 /* 13PlanList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA891B31152000395634 /* 13PlanList.plist */; };
 		CD9DAA8C1B315C1200395634 /* sort13PlanListArray.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */; };
 		CD9DAA921B315EC400395634 /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9DAA8F1B315EC400395634 /* CircleProgressView.m */; };
@@ -67,6 +70,9 @@
 		CD3BFF711B2976F000F2D330 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD3BFF721B2976F000F2D330 /* RUN13Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RUN13Tests.m; sourceTree = "<group>"; };
 		CD3BFF7D1B29ACCA00F2D330 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CD744EF31B3930EC00E6957E /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
+		CD744EF41B3930EC00E6957E /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
+		CD744EF71B3937CB00E6957E /* Delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Delete.png; sourceTree = "<group>"; };
 		CD9DAA891B31152000395634 /* 13PlanList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 13PlanList.plist; sourceTree = "<group>"; };
 		CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sort13PlanListArray.plist; sourceTree = "<group>"; };
 		CD9DAA8E1B315EC400395634 /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressView.h; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 		CD3BFF521B2976EF00F2D330 /* RUN13 */ = {
 			isa = PBXGroup;
 			children = (
+				CD744EF21B3930EC00E6957E /* Image */,
 				CD9DAA941B3169D100395634 /* Model */,
 				CD9DAA8D1B315EC400395634 /* CircularProgressView */,
 				CD0CF9131B300A240099AE55 /* DOPNavbarMenu */,
@@ -204,6 +211,16 @@
 				CD3BFF711B2976F000F2D330 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD744EF21B3930EC00E6957E /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				CD744EF71B3937CB00E6957E /* Delete.png */,
+				CD744EF31B3930EC00E6957E /* Pause.png */,
+				CD744EF41B3930EC00E6957E /* Play.png */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		CD9DAA8D1B315EC400395634 /* CircularProgressView */ = {
@@ -308,14 +325,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD744EF81B3937CB00E6957E /* Delete.png in Resources */,
 				CD3BFF621B2976EF00F2D330 /* Main.storyboard in Resources */,
 				CD3BFF671B2976EF00F2D330 /* LaunchScreen.xib in Resources */,
 				CD9DAA8C1B315C1200395634 /* sort13PlanListArray.plist in Resources */,
 				CDE19E381B2AC2B200D2C4E6 /* paubu.wav in Resources */,
+				CD744EF51B3930EC00E6957E /* Pause.png in Resources */,
 				CDE19E391B2AC2B200D2C4E6 /* xingzou.wav in Resources */,
 				CDE19E361B2AC2B200D2C4E6 /* jieshu.wav in Resources */,
 				CD9DAA8A1B31152000395634 /* 13PlanList.plist in Resources */,
 				CD3BFF641B2976EF00F2D330 /* Images.xcassets in Resources */,
+				CD744EF61B3930EC00E6957E /* Play.png in Resources */,
 				CD0CF90C1B2FBB920099AE55 /* zbkaishi.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

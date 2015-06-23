@@ -14,7 +14,7 @@
 
 @class CircleProgressView;
 
-@interface ViewController : UIViewController<UIAlertViewDelegate, DOPNavbarMenuDelegate,CNPPopupControllerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface ViewController : UIViewController<UIAlertViewDelegate, DOPNavbarMenuDelegate,CNPPopupControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 
 @property (assign, nonatomic) NSInteger numberOfMenuIetm;
 @property (strong, nonatomic) DOPNavbarMenu *navMenu;
@@ -27,8 +27,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *showData;
 @property (strong, nonatomic) IBOutlet UILabel *showStatusString;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
-@property (strong, nonatomic) IBOutlet UIButton *pauseButton;
-@property (strong, nonatomic) IBOutlet UIButton *stopButton;
+//@property (strong, nonatomic) IBOutlet UIButton *pauseButton;
+//@property (strong, nonatomic) IBOutlet UIButton *stopButton;
 @property (strong, nonatomic) IBOutlet UILabel *showStartTime;
 @property (strong, nonatomic) NSDate *startDate;
 @property (strong, nonatomic) NSDate *endDate;
@@ -53,8 +53,8 @@
 
 //- (IBAction)saveTextfieldData:(id)sender;
 - (IBAction)startRun:(id)sender;
-- (IBAction)pauseRun:(id)sender;
-- (IBAction)stopRun:(id)sender;
+//- (IBAction)pauseRun:(id)sender;
+//- (IBAction)stopRun:(id)sender;
 //- (IBAction)cancelRun:(id)sender;
 
 @end
