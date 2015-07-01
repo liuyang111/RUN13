@@ -13,6 +13,7 @@
 @end
 
 @implementation historyTableViewController
+@synthesize trainResultArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +23,35 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context=[appdelegate managedObjectContext];
+
+    // 初始化一个查询请求
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    // 设置要查询的实体
+    request.entity = [NSEntityDescription entityForName:@"TrainResult" inManagedObjectContext:context];
+    // 设置排序（按照age降序）
+    //    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"age" ascending:NO];
+    //    request.sortDescriptors = [NSArray arrayWithObject:sort];
+    //    // 设置条件过滤(搜索name中包含字符串"Itcast-1"的记录，注意：设置条件过滤时，数据库SQL语句中的%要用*来代替，所以%Itcast-1%应该写成*Itcast-1*)
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name like %@", @"*Itcast-1*"];
+    //    request.predicate = predicate;
+    //    // 执行请求
+    NSError *error = nil;
+    trainResultArray = [context executeFetchRequest:request error:&error];
+    if (error) {
+        [NSException raise:@"查询错误" format:@"%@", [error localizedDescription]];
+    }
+    // 遍历数据
+    for (NSManagedObject *obj in trainResultArray) {
+        NSLog(@"his start=%@", [obj valueForKey:@"startTime"]);
+        NSLog(@"his end=%@", [obj valueForKey:@"endTime"]);
+        NSLog(@"his type=%@", [obj valueForKey:@"trainType"]);
+        NSLog(@"his pause=%@", [obj valueForKey:@"pauseTimes"]);
+        NSLog(@"his add time=%@", [obj valueForKey:@"addTime"]);
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

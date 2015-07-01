@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface historyTableViewController : UITableViewController
 
+@property (nonatomic,strong) NSArray *trainResultArray;
 @end

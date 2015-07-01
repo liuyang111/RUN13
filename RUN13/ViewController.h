@@ -11,6 +11,7 @@
 #import "DOPNavbarMenu.h"
 #import <CNPPopupController/CNPPopupController.h>
 #import "Session.h"
+#import <CoreData/CoreData.h>
 
 @class CircleProgressView;
 
@@ -34,6 +35,7 @@
 @property (strong, nonatomic) NSDate *endDate;
 @property (strong, nonatomic) NSString *startDateString;
 @property (strong, nonatomic) NSString *endDateString;
+@property (strong, nonatomic) NSString *trainTypeStr;
 @property (strong, nonatomic) IBOutlet UIProgressView * trainingSchedule;
 
 //@property (strong, nonatomic) IBOutlet UILabel *realTime;

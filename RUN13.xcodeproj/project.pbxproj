@@ -23,6 +23,8 @@
 		CD744EF51B3930EC00E6957E /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = CD744EF31B3930EC00E6957E /* Pause.png */; };
 		CD744EF61B3930EC00E6957E /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = CD744EF41B3930EC00E6957E /* Play.png */; };
 		CD744EF81B3937CB00E6957E /* Delete.png in Resources */ = {isa = PBXBuildFile; fileRef = CD744EF71B3937CB00E6957E /* Delete.png */; };
+		CD744EFA1B3956D700E6957E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD744EF91B3956D700E6957E /* CoreData.framework */; };
+		CD744EFD1B3A823800E6957E /* TrainResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CD744EFC1B3A823800E6957E /* TrainResult.m */; };
 		CD9DAA8A1B31152000395634 /* 13PlanList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA891B31152000395634 /* 13PlanList.plist */; };
 		CD9DAA8C1B315C1200395634 /* sort13PlanListArray.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */; };
 		CD9DAA921B315EC400395634 /* CircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9DAA8F1B315EC400395634 /* CircleProgressView.m */; };
@@ -73,6 +75,9 @@
 		CD744EF31B3930EC00E6957E /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
 		CD744EF41B3930EC00E6957E /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
 		CD744EF71B3937CB00E6957E /* Delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Delete.png; sourceTree = "<group>"; };
+		CD744EF91B3956D700E6957E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CD744EFB1B3A823800E6957E /* TrainResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainResult.h; sourceTree = "<group>"; };
+		CD744EFC1B3A823800E6957E /* TrainResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainResult.m; sourceTree = "<group>"; };
 		CD9DAA891B31152000395634 /* 13PlanList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 13PlanList.plist; sourceTree = "<group>"; };
 		CD9DAA8B1B315C1200395634 /* sort13PlanListArray.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sort13PlanListArray.plist; sourceTree = "<group>"; };
 		CD9DAA8E1B315EC400395634 /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressView.h; sourceTree = "<group>"; };
@@ -93,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD744EFA1B3956D700E6957E /* CoreData.framework in Frameworks */,
 				CDE19E3B1B2AC3CF00D2C4E6 /* AVFoundation.framework in Frameworks */,
 				CD3BFF7E1B29ACCA00F2D330 /* AudioToolbox.framework in Frameworks */,
 				EDF733F4930BED0C7DF88E5C /* libPods.a in Frameworks */,
@@ -121,6 +127,7 @@
 		C77F0F0EE8F7A548936535F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD744EF91B3956D700E6957E /* CoreData.framework */,
 				925762C9BB3F4F22039A2571 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -239,6 +246,8 @@
 			children = (
 				CD9DAA951B3169E200395634 /* Session.h */,
 				CD9DAA961B3169E200395634 /* Session.m */,
+				CD744EFB1B3A823800E6957E /* TrainResult.h */,
+				CD744EFC1B3A823800E6957E /* TrainResult.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -395,6 +404,7 @@
 				CD0CF9191B300A240099AE55 /* UIView+DOPExtension.m in Sources */,
 				CD9DAA971B3169E200395634 /* Session.m in Sources */,
 				CD3BFF5F1B2976EF00F2D330 /* ViewController.m in Sources */,
+				CD744EFD1B3A823800E6957E /* TrainResult.m in Sources */,
 				CD0CF9181B300A240099AE55 /* DOPNavbarMenu.m in Sources */,
 				CD3BFF561B2976EF00F2D330 /* main.m in Sources */,
 			);
@@ -523,9 +533,11 @@
 			baseConfigurationReference = 7D55E2F29CDB3A355896A4C6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yang Liu (6L78WA65FZ)";
 				INFOPLIST_FILE = RUN13/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8e4b0d73-7875-41f6-8761-84c549a06465";
 			};
 			name = Debug;
 		};
@@ -534,9 +546,11 @@
 			baseConfigurationReference = E9C05E25AB22D9D1A8300BF1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yang Liu (6L78WA65FZ)";
 				INFOPLIST_FILE = RUN13/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8e4b0d73-7875-41f6-8761-84c549a06465";
 			};
 			name = Release;
 		};

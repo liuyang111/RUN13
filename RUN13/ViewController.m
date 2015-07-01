@@ -9,11 +9,13 @@
 #import "ViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "historyTableViewController.h"
-#import <SBJson/SBJson4Writer.h>
+//#import <SBJson/SBJson4Writer.h>
 #import "CircleProgressView.h"
 #import "Session.h"
+#import "AppDelegate.h"
+#import "TrainResult.h"
 
-#define SET_MINITE_TIME 60
+#define SET_MINITE_TIME 6
 
 @interface ViewController (){
     BOOL ifStarted;
@@ -45,7 +47,7 @@
 @synthesize startDateString;
 @synthesize endDateString;
 @synthesize trainingSchedule;
-
+@synthesize trainTypeStr;
 
 int vibratenumber = 0;
 int doneWalknumber = 0;
@@ -127,10 +129,10 @@ unsigned int unitFlags;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"功能" style:UIBarButtonItemStylePlain target:self action:@selector(openMenu:)];
     
     
-    if (showData == nil) {
-        showData = [[UILabel alloc] init];
-        showData.text = [NSString stringWithFormat:@"请首先设置训练计划"];
-    }
+//    if (showData == nil) {
+//        showData = [[UILabel alloc] init];
+//        showData.text = [NSString stringWithFormat:@"请首先设置训练计划"];
+//    }
     
     
 //    stopButton.enabled = NO;
@@ -147,6 +149,25 @@ unsigned int unitFlags;
 
     ifStarted = NO;
     ifPauseed = NO;
+    
+    
+    
+    // 从应用程序包中加载模型文件
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+    // 传入模型对象，初始化NSPersistentStoreCoordinator
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+    // 构建SQLite数据库文件的路径
+    NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSURL *url = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"trainresult.data"]];
+    // 添加持久化存储库，这里使用SQLite作为存储库
+    NSError *error = nil;
+    NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error];
+    if (store == nil) { // 直接抛异常
+        [NSException raise:@"添加数据库错误" format:@"%@", [error localizedDescription]];
+    }
+    // 初始化上下文，设置persistentStoreCoordinator属性
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+    context.persistentStoreCoordinator = psc;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -311,6 +332,7 @@ unsigned int unitFlags;
             [alert show];
         }else{
             [self showSetPlanDataWithWalk:walkTextFied.text.floatValue Run:runTextFied.text.floatValue Count:countTextFied.text.intValue];
+            self.trainTypeStr = [NSString stringWithFormat:@"自定义"];
             [self.popupController dismissPopupControllerAnimated:YES];
         }
     };
@@ -473,6 +495,62 @@ unsigned int unitFlags;
     }
 }
 
+- (void)saveTrainResultDataWithStartTime:(NSString *)startTimeString EndTime:(NSString *)endTimeString TrainType:(NSString *)trainTypeString TrainDetail:(NSString *)trainDetailString PauseTimes:(NSString *)pauseTimesString AddTime:(NSString *)addTimeString{
+    
+    // 传入上下文，创建一个Person实体对象
+//    NSManagedObjectContext *context;
+    AppDelegate *appdelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context=[appdelegate managedObjectContext];
+    
+//    NSManagedObject *person = [NSEntityDescription insertNewObjectForEntityForName:@"TrainResult" inManagedObjectContext:context];
+//    // 设置Person的简单属性
+//    [person setValue:startTime forKey:@"startTime"];
+//    [person setValue:endTime forKey:@"endTime"];
+//    // 利用上下文对象，将数据同步到持久化存储库
+    
+    TrainResult *trainResultInsert = [NSEntityDescription insertNewObjectForEntityForName:@"TrainResult" inManagedObjectContext:context];
+    trainResultInsert.startTime = startTimeString;
+    trainResultInsert.endTime = endTimeString;
+    trainResultInsert.trainType = trainTypeString;
+    trainResultInsert.pauseTimes = pauseTimesString;
+    trainResultInsert.trainDetail = trainDetailString;
+    trainResultInsert.addTime = addTimeString;
+    
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"booki insert Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+
+    
+    
+    // 初始化一个查询请求
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    // 设置要查询的实体
+    request.entity = [NSEntityDescription entityForName:@"TrainResult" inManagedObjectContext:context];
+    // 设置排序（按照age降序）
+//    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"age" ascending:NO];
+//    request.sortDescriptors = [NSArray arrayWithObject:sort];
+//    // 设置条件过滤(搜索name中包含字符串"Itcast-1"的记录，注意：设置条件过滤时，数据库SQL语句中的%要用*来代替，所以%Itcast-1%应该写成*Itcast-1*)
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name like %@", @"*Itcast-1*"];
+//    request.predicate = predicate;
+//    // 执行请求
+//    NSError *error = nil;
+    NSArray *objs = [context executeFetchRequest:request error:&error];
+    if (error) {
+        [NSException raise:@"查询错误" format:@"%@", [error localizedDescription]];
+    }
+    // 遍历数据
+    for (NSManagedObject *obj in objs) {
+        NSLog(@"start=%@", [obj valueForKey:@"startTime"]);
+        NSLog(@"end=%@", [obj valueForKey:@"endTime"]);
+        NSLog(@"type=%@", [obj valueForKey:@"trainType"]);
+        NSLog(@"pause=%@", [obj valueForKey:@"pauseTimes"]);
+        NSLog(@"add time=%@", [obj valueForKey:@"addTime"]);
+    }
+}
+
 #pragma mark walk and run timer logic
 //使用定时器控制跑步和走路的时间，初始定义都是先开始走路，后跑步。每一次次数加1，当走路次数查过定义循环数时，标示已完成训练。
 - (void)walkTimerSetting:(NSTimer *)timer{
@@ -527,14 +605,13 @@ unsigned int unitFlags;
         self.showStartTime.text = [NSString stringWithFormat:@"%@------%@",self.startDateString,self.endDateString];
         
         
-        self.circleProgressView.status = NSLocalizedString(@"训练结束", nil);
-        self.circleProgressView.tintColor = [UIColor whiteColor];
-        self.circleProgressView.elapsedTime = 0;
-        
         [self.progressTimer invalidate];
         self.progressTimer = nil;
         [self.timer invalidate];
         self.timer = nil;
+        self.circleProgressView.status = NSLocalizedString(@"训练结束", nil);
+        self.circleProgressView.tintColor = [UIColor whiteColor];
+        self.circleProgressView.elapsedTime = 0;
         
         self.showStatusString.text = [NSString stringWithFormat:NSLocalizedString(@"恭喜你，本次训练结束，将自动保存记录。", @""),doneWalknumber];
         
@@ -557,6 +634,11 @@ unsigned int unitFlags;
         }
         startButton.enabled = YES;
 
+        ifStarted = NO;
+        [self.startButton setImage:[UIImage imageNamed:@"Play"] forState:UIControlStateNormal];
+        
+//        [self saveTrainResultDataWithStartTime:self.startDateString endTime:self.endDateString];
+        [self saveTrainResultDataWithStartTime:self.startDateString EndTime:self.endDateString TrainType:self.trainTypeStr TrainDetail:showData.text PauseTimes:[NSString stringWithFormat:@"%d",pausetimes] AddTime:nil];
     }
 }
 
@@ -715,6 +797,9 @@ static void completionCallback (SystemSoundID  mySSID,  int num){
     NSLog(@"--%@",[[self.planPliatDictionary allValues] objectAtIndex:indexPath.row ]);
     NSDictionary *selectDic = [[self.planPliatDictionary allValues] objectAtIndex:indexPath.row ];
 
+    NSLog(@"selected keys====%@",[[self.planPliatDictionary allKeys] objectAtIndex:indexPath.row ]);
+    self.trainTypeStr = [[self.planPliatDictionary allKeys] objectAtIndex:indexPath.row ];
+    
     [self showSetPlanDataWithWalk:[[selectDic objectForKey:@"walk"]floatValue] Run:[[selectDic objectForKey:@"run"]floatValue] Count:[[selectDic objectForKey:@"count"]intValue]];
 }
 
